@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="pay-web-trade-gateway">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="pay-facaed-merchant-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-facaed-merchant/pay-facaed-merchant">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-common-core-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-common-core/pay-common-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-common-config-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-common-config/pay-common-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-facaed-system-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-facaed-system/pay-facaed-system">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-facaed-trade-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-facaed-trade/pay-facaed-trade">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="pay-facaed-notify-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pay-facaed-notify/pay-facaed-notify">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="pay-web-trade-gateway"/>
+        <property name="java-output-path" value="/pay-web-trade-gateway/target/classes"/>
+    </wb-module>
+</project-modules>

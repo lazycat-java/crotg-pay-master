@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crotg.pay.service.notify.dao.PayNotifyDao">
+
+	<resultMap id="PayNotifyVo" type="com.crotg.pay.facaed.notify.po.PayNotify">
+		<id property="id" column="id" />
+		<result property="merchantNo" column="merchant_no" />
+
+		<result property="merchantOrderNo" column="merchant_order_no" />
+
+		<result property="notifyUrl" column="notify_url" />
+
+		<result property="notifyType" column="notify_type" />
+
+		<result property="createDate" column="create_date" />
+
+		<result property="notifyDate" column="notify_date" />
+
+		<result property="notifyTimes" column="notify_times" />
+
+		<result property="status" column="status" />
+
+		<result property="payResult" column="pay_result" />
+	</resultMap>
+
+
+	<sql id="sql_select">
+		select id, merchant_no, merchant_order_no, notify_url,
+		notify_type, create_date,
+		notify_date, notify_times,pay_result, status
+		trade_pay_notify
+	</sql>
+
+
+	<insert id="insertNotify" parameterType="com.crotg.pay.facaed.notify.po.PayNotify">
+		INSERT INTO
+		trade_pay_notify
+		(merchant_no,merchant_order_no,notify_url,notify_type,create_date,notify_date,notify_times,status,pay_result)
+		VALUES
+		(#{merchantNo},#{merchantOrderNo},#{notifyUrl},#{notifyType},#{createDate},#{notifyDate},#{notifyTimes},1,#{payResult})
+	</insert>
+
+	<update id="updateNotify" parameterType="com.crotg.pay.facaed.notify.po.PayNotify">
+		update trade_pay_notify
+		set notify_date = #{notifyDate} , notify_times = notify_times+1
+		,status = #{status} where merchant_no = #{merchantNo} and
+		merchant_order_no = #{merchantOrderNo}
+	</update>
+
+</mapper>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+<button id="btn">点我</button>
+</body>
+</html>
+
+<script type="text/javascript">
+
+$(function(){
+	$("#btn").click(function(){
+		alert("sad");
+		
+		$.ajax({
+			url:"/pay-web-trade-gateway/test/test1",
+			type:"POST",
+			data:{
+				"str":"trade201706080120187435"
+			},
+			dataType:"TEXT",
+			success:function(data){
+				alert(data);
+			}
+		});
+	});
+});
+
+
+</script>

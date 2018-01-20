@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+	<input id="orderNo" value="" />
+	<button id="btn">支付测试按钮</button>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+	$("#btn").click(function() {
+		var appId = "";
+		var nonceStr = "";
+		var package = "";
+		var paySign = "";
+		var signType = "MD5";
+		var timeStamp = "";
+		$.ajax({
+			url : "/pay-web-trade-gateway/trade/pay",
+			type : "POST",
+			headers : {
+				"merchantNo" : "trade201706080120187435"
+			},
+			async : false,
+			data : {
+				"tradeDesc" : "测试",
+				"merchantOrderNo" : $("#orderNo").val(),
+				"totalFee":"1",
+				"spbillCreateIp" : "192.168.0.99",
+				"tradeType" : "1",
+				"openid" : "o0hj6vyaqR4yn_g83G0NXym-A2sw",
+				"expire" : "500",
+				"payPass":"1",
+				"callUrl":"baidu.com"
+			},
+			success : function(data) {
+				if (data.status == false) {
+					alert(data.msg);
+				}
+				appId = data.data.appId;
+				nonceStr = data.data.nonceStr;
+				package = data.data.package;
+				paySign = data.data.paySign;
+				timeStamp = data.data.timeStamp;
+				alert(timeStamp+",1");
+				WeixinJSBridge.invoke('getBrandWCPayRequest', {
+					"appId" : appId, //公众号名称，由商户传入     
+					"timeStamp" : "1395712654", //时间戳，自1970年以来的秒数     
+					"nonceStr" : nonceStr, //随机串     
+					"package" : package,
+					"signType" : "MD5", //微信签名方式：     
+					"paySign" : paySign
+				//微信签名 
+
+				}, function(res) {
+					if(res.err_msg=="get_brand_wcpay_request:cancel"||res.err_msg=="get_brand_wcpay_request:fail"){
+						$.post("/admin/wxpay/payFail",{outTradeNo:$("#orderNo").val()},function(data){
+							alert(data.msg);
+						});
+					}
+				});
+			}
+		});
+
+	});
+</script>

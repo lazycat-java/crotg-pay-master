@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crotg.pay.service.system.dao.SysProfileDao">
+
+	<!--实体映射 -->
+	<resultMap id="Profile" type="com.crotg.pay.facaed.system.po.SysProfile">
+		<id property="id" column="id" />
+
+		<result property="code" column="code" />
+
+		<result property="value" column="value" />
+
+		<result property="type" column="type" />
+	</resultMap>
+	<!-- 通用sql -->
+	<sql id="sql_select">
+		select id,code,value from admin_sys_profile
+	</sql>
+
+	<!-- 查询全部变量放到缓存 -->
+	<select id="getAllProfileCache" resultMap="Profile">
+		<include refid="sql_select"></include>
+	</select>
+
+	<select id="getProfileByCode" resultMap="Profile" parameterType="String">
+		<include refid="sql_select"></include>
+		where code = #{code}
+	</select>
+
+</mapper>
